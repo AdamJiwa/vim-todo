@@ -11,6 +11,7 @@ local function exists(file)
    return false 
 end
 
+-- TODO find a nice way to deal with creating dirs posix
 local function init()
     -- if not exists("/todo") then
     --     os.execute("mkdir /todo")
@@ -26,14 +27,27 @@ local function TodaysTodo()
     OpenFile(today)
 end
 
+local function TomorrowsTodo()
+    local date = os.date.now()
+    date.days = date.days + 1
+    OpenFile(os.date(dateFormat, date))
+end
+
 local function YesterdaysTodo()
     local date = os.date.now()
     date.days = date.days - 1
     OpenFile(os.date(dateFormat, date))
 end
 
+local function GlobalTodo()
+    -- Should maybe move this to a seperate folder
+    OpenFile("global")
+end
+
 return {
     init = init,
     TodaysTodo = TodaysTodo,
-    YesterdaysTodo = YesterdaysTodo
+    TomorrowsTodo = TomorrowsTodo,
+    YesterdaysTodo = YesterdaysTodo,
+    GlobalTodo = GlobalTodo
 }
