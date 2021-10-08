@@ -1,0 +1,13 @@
+nvim --cmd "set rtp+=$(pwd)" .
+
+Lua creating window is apparently not for extra splits but floating or externals
+To get a split using the vim command and then to attach a buffer you have to get
+the Id of the win. This is confusing as nvim_create_win should be the correct
+method then.
+
+lua's os date behaving funny.
+
+as a buffer is differnt then a window setting the buffers name to a file that is
+already a buffer causes an error so we will need to check if that buffer exists
+first. also need to tell the buffer to re-read the file?
+
